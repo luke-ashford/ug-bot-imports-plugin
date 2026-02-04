@@ -16,10 +16,6 @@ class DynamicImportsResolver : PyReferenceResolveProvider {
         context: TypeEvalContext
     ): List<RatedResolveResult?> {
 
-        val pare = element.parent
-
-        return emptyList()
-
         val parent = element.parent as? PyImportElement ?: return emptyList()
         if (parent.name != "models") return emptyList()
 
