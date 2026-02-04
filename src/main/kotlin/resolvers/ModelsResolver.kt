@@ -1,4 +1,4 @@
-package resolver
+package resolvers
 
 import com.jetbrains.python.codeInsight.PyCustomMember
 import com.jetbrains.python.psi.PyFile
@@ -44,4 +44,5 @@ class ModelsResolver : PyModuleMembersProvider() {
     private fun createResolvedMember(name: String, target: PsiElement): PyCustomMember? {
         return PyCustomMember(name, target)
     }
+
 }

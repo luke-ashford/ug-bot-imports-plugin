@@ -13,6 +13,8 @@
 
     <!--Register the extensions here, use the API documentation to know how to register which extensions-->
     <extensions defaultExtensionNs="Pythonid">
-        <pyModuleMembersProvider implementation="resolver.ModelsResolver"/>
+        <pyModuleMembersProvider implementation="resolvers.ModelsResolver"/>
+        <pyModuleMembersProvider implementation="resolvers.ServicesResolver"/>
+        <pyClassMembersProvider implementation="resolvers.TablesResolver"/>
     </extensions>
 </idea-plugin>

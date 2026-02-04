@@ -16,6 +16,7 @@ This plugin is designed specifically for PyCharm, to correctly refence classes, 
  - Clone the repository, and open in IntelliJ IDEA with the necessary plugins installed.
  - Refer to docs for general instruction on plugin development: https://plugins.jetbrains.com/docs/intellij/welcome.html
  - Refer here for PyCharm specific extension API: https://plugins.jetbrains.com/docs/intellij/intellij-community-plugins-extension-point-list.html
+ - To test and debug, run `./gradlew runIde`
 
 ### Build & Install:
  - Run `./gradlew buildPlugin`
