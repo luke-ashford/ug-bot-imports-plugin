@@ -4,8 +4,8 @@ plugins {
     id("org.jetbrains.intellij.platform") version "2.10.2"
 }
 
-group = "uk.co.terkeypie"
-version = "1.0-SNAPSHOT"
+group = "com.luke-ashford"
+version = "1.0-1"
 
 repositories {
     mavenCentral()
@@ -14,14 +14,11 @@ repositories {
     }
 }
 
-// Read more: https://plugins.jetbrains.com/docs/intellij/tools-intellij-platform-gradle-plugin.html
 dependencies {
     intellijPlatform {
         pycharm("2025.3.2")
         bundledPlugin("PythonCore")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
-
-        // Add plugin dependencies for compilation here:
     }
 }
 
@@ -32,13 +29,12 @@ intellijPlatform {
         }
 
         changeNotes = """
-            Initial version
+            Added reference resolution for models/ package
         """.trimIndent()
     }
 }
 
 tasks {
-    // Set the JVM compatibility versions
     withType<JavaCompile> {
         sourceCompatibility = "21"
         targetCompatibility = "21"

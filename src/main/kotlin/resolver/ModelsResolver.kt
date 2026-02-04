@@ -1,12 +1,11 @@
 package resolver
 
-import com.intellij.psi.search.FilenameIndex
-import com.intellij.psi.search.GlobalSearchScope
 import com.jetbrains.python.codeInsight.PyCustomMember
 import com.jetbrains.python.psi.PyFile
 import com.jetbrains.python.psi.types.PyModuleMembersProvider
 import com.jetbrains.python.psi.types.TypeEvalContext
 import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiManager
 
 class ModelsResolver : PyModuleMembersProvider() {
 
@@ -23,19 +22,17 @@ class ModelsResolver : PyModuleMembersProvider() {
 
         val dir = virtualFile.parent ?: return emptyList()
 
-        val scope = GlobalSearchScope.projectScope(file.project)
-
-        val members = dir.children
+        val memberClasses = dir.children
+            .asSequence()
             .filter { it.name != "__init__.py" && it.name.endsWith(".py") }
-            .map { it.name }
-            .flatMap { FilenameIndex.getFilesByName(file.project, it, scope).asSequence() }
-            .filterIsInstance<PyFile>()
+            .mapNotNull { dir.findChild(it.name) }
+            .mapNotNull { PsiManager.getInstance(file.project).findFile(it) as? PyFile}
             .filter { it.parent?.name == "models" }
             .flatMap { it.topLevelClasses.asSequence() }
             .map { createResolvedMember(it.name!!, it) }
             .toList()
 
-        return members
+        return memberClasses
     }
 
     private fun createResolvedMember(name: String, target: PsiElement): PyCustomMember? {

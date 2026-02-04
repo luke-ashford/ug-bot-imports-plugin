@@ -1,16 +1,13 @@
 <idea-plugin>
     <id>com.luke-ashford.ugbotdynamicresolver</id>
 
-    <name>UG Bot Dynamic Imports Resolver</name>
+    <name>Referencing Resolver for UG Bot</name>
 
     <vendor url="https://luke-ashford.com">Luke Ashford</vendor>
 
     <description><![CDATA[
-        Open source plugin for resolving dynamic imports and SimpleNamespaces within the UGBot project
+        Plugin for resolving dynamic imports and namespacing within the UGBot project
     ]]></description>
-
-    <!-- Product and plugin compatibility requirements.
-         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
 
     <depends>com.intellij.modules.python</depends>
 
