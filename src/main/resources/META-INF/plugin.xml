@@ -15,8 +15,6 @@
     <depends>com.intellij.modules.python</depends>
 
     <extensions defaultExtensionNs="Pythonid">
-        <pyReferenceResolveProvider implementation="dynamic.resolver.DynamicImportsResolver"/>
-        <importResolver implementation="dynamic.resolver.TestImportsResolver"/>
-        <pyModuleMembersProvider implementation="dynamic.resolver.TestModuleMemberProvider"/>
+        <pyModuleMembersProvider implementation="resolver.ModelsResolver"/>
     </extensions>
 </idea-plugin>

@@ -1,4 +1,4 @@
-package dynamic.resolver
+package resolver
 
 import com.intellij.psi.search.FilenameIndex
 import com.intellij.psi.search.GlobalSearchScope
@@ -8,7 +8,7 @@ import com.jetbrains.python.psi.types.PyModuleMembersProvider
 import com.jetbrains.python.psi.types.TypeEvalContext
 import com.intellij.psi.PsiElement
 
-class TestModuleMemberProvider : PyModuleMembersProvider() {
+class ModelsResolver : PyModuleMembersProvider() {
 
     override fun getMembersByQName(
         file: PyFile,
