@@ -11,6 +11,7 @@
 
     <depends>com.intellij.modules.python</depends>
 
+    <!--Register the extensions here, use the API documentation to know how to register which extensions-->
     <extensions defaultExtensionNs="Pythonid">
         <pyModuleMembersProvider implementation="resolver.ModelsResolver"/>
     </extensions>
