@@ -18,6 +18,7 @@ repositories {
 dependencies {
     intellijPlatform {
         pycharm("2025.3.2")
+        bundledPlugin("PythonCore")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
 
         // Add plugin dependencies for compilation here:
