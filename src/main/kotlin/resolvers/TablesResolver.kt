@@ -18,7 +18,7 @@ class TablesResolver : PyClassMembersProvider {
         context: TypeEvalContext
     ): Collection<PyCustomMember?> {
 
-        if (clazz?.name != "Cache" && clazz?.name != "Database") return emptyList()
+        if (clazz?.name != "Database") return emptyList()
 
         val dir = clazz.pyClass.parent.parent as? PsiDirectory ?: return emptyList()
 
@@ -36,7 +36,7 @@ class TablesResolver : PyClassMembersProvider {
         resolveContext: PyResolveContext
     ): PsiElement? {
 
-        if (type.pyClass.name != "Cache" && type.pyClass.name != "Database") return null
+        if (type.pyClass.name != "Database") return null
 
         val dir = type.pyClass.parent.parent as? PsiDirectory ?: return null
 
