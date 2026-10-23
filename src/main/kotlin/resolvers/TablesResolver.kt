@@ -18,12 +18,12 @@ class TablesResolver : PyClassMembersProvider {
         context: TypeEvalContext
     ): Collection<PyCustomMember?> {
 
-        if (clazz?.name != "Database") return emptyList()
+        if (clazz?.name != "Cache" && clazz?.name != "Database") return emptyList()
 
         val dir = clazz.pyClass.parent.parent as? PsiDirectory ?: return emptyList()
 
         val memberClasses = getTablesClasses(dir)
-            .map { PyCustomMember(convertToSnakeCase(convertToSnakeCase(it.name!!)), it) }
+            .map { PyCustomMember(convertToSnakeCase(it.name!!), it.qualifiedName, true) }
 
         return memberClasses
 
@@ -43,7 +43,11 @@ class TablesResolver : PyClassMembersProvider {
         val clazz = getTablesClasses(dir)
             .firstOrNull { convertToSnakeCase(it.name!!) == name }
 
-        return clazz
+        return PyCustomMember(
+            name,
+            clazz?.qualifiedName,
+            true
+        ).resolve(location ?: type.pyClass, resolveContext)
 
     }
 

@@ -16,5 +16,6 @@
         <pyModuleMembersProvider implementation="resolvers.ModelsResolver"/>
         <pyModuleMembersProvider implementation="resolvers.ServicesResolver"/>
         <pyClassMembersProvider implementation="resolvers.TablesResolver"/>
+        <pyClassMembersProvider implementation="resolvers.RobloxResolver"/>
     </extensions>
 </idea-plugin>
