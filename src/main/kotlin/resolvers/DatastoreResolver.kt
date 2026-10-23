@@ -18,15 +18,17 @@ class DatastoreResolver : PyClassMembersProvider {
         context: TypeEvalContext
     ): Collection<PyCustomMember?> {
 
-        if (clazz?.name != "Roblox") return emptyList()
+        val cwdir = clazz?.pyClass?.parent?.parent as? PsiDirectory ?: return emptyList()
+        if (cwdir.name != "Universes") return emptyList()
 
-        val dir = clazz.pyClass.parent.parent as? PsiDirectory ?: return emptyList()
+        val glob_dir = cwdir.parent as PsiDirectory
+        val datastore_dir = glob_dir.findSubdirectory("Datastores") ?: return emptyList()
+        val universe_dir = datastore_dir.findSubdirectory(clazz.name!!) ?: return emptyList()
 
-        val memberClasses = getUniverseClasses(dir)
+        val memberClasses = getDatastoreClasses(universe_dir)
              .map { PyCustomMember(it.name!!, it) }
 
         return memberClasses
-
     }
 
     override fun resolveMember(
@@ -36,24 +38,22 @@ class DatastoreResolver : PyClassMembersProvider {
         resolveContext: PyResolveContext
     ): PsiElement? {
 
-        if (type.pyClass.name != "Roblox") return null
+        val cwdir = type.pyClass.parent.parent as? PsiDirectory ?: return null
+        if (cwdir.name != "Universes") return null
 
-        val dir = type.pyClass.parent.parent as? PsiDirectory ?: return null
+        val glob_dir = cwdir.parent as PsiDirectory
+        val datastore_dir = glob_dir.findSubdirectory("Datastores") ?: return null
+        val universe_dir = datastore_dir.findSubdirectory(type.name!!) ?: return null
 
-        val clazz = getUniverseClasses(dir)
+        val clazz = getDatastoreClasses(universe_dir)
             .firstOrNull { it.name!! == name }
 
         return clazz
 
     }
 
-    private fun getUniverseClasses(dir: PsiDirectory): List<PyClass> {
-        val universeDir = dir.children
-            .filterIsInstance<PsiDirectory>()
-            .firstOrNull { it.name == "Universes" }
-            ?: return emptyList()
-
-        return universeDir.children
+    private fun getDatastoreClasses(dir: PsiDirectory): List<PyClass> {
+        return dir.children
             .filterIsInstance<PyFile>()
             .flatMap { it.topLevelClasses.asSequence() }
     }
