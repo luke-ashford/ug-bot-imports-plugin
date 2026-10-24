@@ -6,8 +6,8 @@ This plugin is designed specifically for PyCharm, to correctly refence classes, 
 
 ### Dependencies:
  - JVM 24 – No earlier or later releases
- - PyCharm 2025.3 - It is designed for this
- - IntelliJ IDEA 2025.3 – It is developed by this, configured with the following plugins:
+ - PyCharm 2026.1.2 - It is designed for this
+ - IntelliJ IDEA 2026.1.2 – It is developed by this, configured with the following plugins:
  - Plugin DevKit: https://plugins.jetbrains.com/plugin/22851-plugin-devkit
  - Gradle: https://plugins.jetbrains.com/plugin/27367-gradle-for-java
  - Maven: https://plugins.jetbrains.com/plugin/27164-maven
