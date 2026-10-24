@@ -1,7 +1,7 @@
 plugins {
     id("java")
-    id("org.jetbrains.kotlin.jvm") version "2.1.20"
-    id("org.jetbrains.intellij.platform") version "2.10.2"
+    id("org.jetbrains.kotlin.jvm") version "2.3.0"
+    id("org.jetbrains.intellij.platform") version "2.19.0"
 }
 
 group = "com.luke-ashford"
@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        pycharm("2025.3.2")
+        pycharm("2026.1.2")
         bundledPlugin("PythonCore")
         testFramework(org.jetbrains.intellij.platform.gradle.TestFrameworkType.Platform)
     }
@@ -25,7 +25,7 @@ dependencies {
 intellijPlatform {
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "252.25557"
+            sinceBuild = "261.24374"
         }
 
         changeNotes = """

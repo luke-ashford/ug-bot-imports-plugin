@@ -21,11 +21,7 @@ class DatastoreResolver : PyClassMembersProvider {
         val cwdir = clazz?.pyClass?.parent?.parent as? PsiDirectory ?: return emptyList()
         if (cwdir.name != "Universes") return emptyList()
 
-        val glob_dir = cwdir.parent as PsiDirectory
-        val datastore_dir = glob_dir.findSubdirectory("Datastores") ?: return emptyList()
-        val universe_dir = datastore_dir.findSubdirectory(clazz.name!!) ?: return emptyList()
-
-        val memberClasses = getDatastoreClasses(universe_dir)
+        val memberClasses = getDatastoreClasses(clazz.name!!, cwdir)
              .map { PyCustomMember(it.name!!, it) }
 
         return memberClasses
@@ -41,21 +37,25 @@ class DatastoreResolver : PyClassMembersProvider {
         val cwdir = type.pyClass.parent.parent as? PsiDirectory ?: return null
         if (cwdir.name != "Universes") return null
 
-        val glob_dir = cwdir.parent as PsiDirectory
-        val datastore_dir = glob_dir.findSubdirectory("Datastores") ?: return null
-        val universe_dir = datastore_dir.findSubdirectory(type.name!!) ?: return null
-
-        val clazz = getDatastoreClasses(universe_dir)
+        val clazz = getDatastoreClasses(type.name!!, cwdir)
             .firstOrNull { it.name!! == name }
 
         return clazz
 
     }
 
-    private fun getDatastoreClasses(dir: PsiDirectory): List<PyClass> {
-        return dir.children
-            .filterIsInstance<PyFile>()
-            .flatMap { it.topLevelClasses.asSequence() }
+    private fun getDatastoreClasses(universe: String, cwdir: PsiDirectory): List<PyClass> {
+        return (cwdir.parent as PsiDirectory)
+            .children
+            .filterIsInstance<PsiDirectory>()
+            .firstOrNull { it.name == "Datastores" }
+            ?.children
+            ?.filterIsInstance<PsiDirectory>()
+            ?.firstOrNull() { it.name == universe }
+            ?.children
+            ?.filterIsInstance<PyFile>()
+            ?.flatMap { it.topLevelClasses.asSequence() }
+            ?: emptyList()
     }
 
 }

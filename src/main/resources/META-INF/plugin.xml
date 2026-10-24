@@ -18,5 +18,6 @@
         <pyClassMembersProvider implementation="resolvers.TablesResolver"/>
         <pyClassMembersProvider implementation="resolvers.UniverseResolver"/>
         <pyClassMembersProvider implementation="resolvers.DatastoreResolver"/>
+        <pyClassMembersProvider implementation="resolvers.EndpointsResolver"/>
     </extensions>
 </idea-plugin>
